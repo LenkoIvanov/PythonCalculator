@@ -1,7 +1,7 @@
 import math
 import os
 
-global MEMORYRESULT; #global variable for memory functions (they can be called at the star)
+global MEMORYRESULT; #global variable for memory functions (they can be called at the start)
 MEMORYRESULT = None;
 
 def printMenu(): 
@@ -63,12 +63,22 @@ def division():
     return result;
 
 def squareRoot():
-    num = numInput();
+    while True:
+        num = numInput();
+        if(num >= 0):
+            break;
+        else:
+            print("Fatal error! There is no real definition of a negative square root!") 
     result = math.sqrt(num);
     return result;
     
 def reciprocal():
-    num = numInput();
+    while True:
+        num = numInput();
+        if(num != 0):
+            break;
+        else:
+            print("Fatal error! Division by zero impossible!")
     result = 1 / num;
     return result;
 
@@ -151,6 +161,8 @@ while(True):
 
     elif(userinput == 'C'):
         clearCalc();
+        memoryClear();
+        result = None;
         printMenu();
         
     elif(userinput == 'x' or userinput == 'X'):
