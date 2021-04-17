@@ -1,18 +1,18 @@
 import math
 import os
 
-global MEMORYRESULT; #global variable for memory functions (they can be called at the start)
+global MEMORYRESULT; #global variable for memory functions (accessed only by the memory functions)
 MEMORYRESULT = None;
 
 def printMenu(): 
     print("Type in the symbol of the action, you wish to perform: ");
-    print(" '+'-addition         '-'-subtraction \n" +
-          " '*'-multiplication   '/'- division    \n" +
-          " 'SQRT'- square root  'RECP'- reciprocal \n" +
-          " 'MS'- memory store   'MC'- memory clear \n" +
-          " 'MR'- memory remind  'M-'- memory subtract \n"+
-          " 'M+'- memory add     'C'- clear all \n"+
-          " 'x' or 'X'- exit ");
+    print(" '+'- addition         '-'- subtraction \n" +    
+          " '*'- multiplication   '/'- division    \n" +
+          " 'SQRT'- square root   'RECP'- reciprocal \n" +
+          " '%'- division(Rem)    'MS'- memory store \n" +
+          " 'MR'- memory remind   'MC'- memory clear \n"+
+          " 'M+'- memory add      'M-'- memory subtract \n"+
+          " 'C' - clear all       'X'- exit");
 
 def numconversion(a):
     if('.' in a):     #if number contains a '.' - it's a floating point
@@ -82,25 +82,37 @@ def reciprocal():
     result = 1 / num;
     return result;
 
-def memoryStore(result):
+def divisionRem():  #division with remainder
+    a = numInput();
+    b = None;
+    while True:
+        b = numInput();
+        if b == 0:
+            print("Fatal error! Division by zero impossible!");
+        else:
+            break;
+    remainder = a%b;
+    return remainder;
+
+def memoryStore(result):  #stores in memory
     global MEMORYRESULT;
     MEMORYRESULT = result;
 
-def memoryClear():
+def memoryClear():  #clears memory
     global MEMORYRESULT;
     MEMORYRESULT = None;
     
 def memoryRecall():
     print("Current result in memory: " + str(MEMORYRESULT));
 
-def memoryAdd(result):
+def memoryAdd(result):  #adds current result to memory
     global MEMORYRESULT;
-    if (MEMORYRESULT != None):  #these functions can be called at the start
+    if (MEMORYRESULT != None):  
         MEMORYRESULT += result;
     else:
         print("Fatal error! Memory is empty! Add to it and retry!");
     
-def memorySubtract(result):
+def memorySubtract(result):  #subtracts current result from memory
     global MEMORYRESULT;
     if (MEMORYRESULT != None):
         MEMORYRESULT -= result;
@@ -111,7 +123,8 @@ def clearCalc():   #doesn't work in IDLE
     if os.name == 'nt':   #for Windows
        os.system('cls');
     else:
-        os.system('clear');  #for Linux
+        os.system('clear'); #for Linux
+    memoryClear();
        
 printMenu();
 userinput = input("Enter: ");
@@ -141,6 +154,10 @@ while(True):
     elif(userinput == 'RECP'):
       result = reciprocal();
       print("Result: " + str(result));
+
+    elif(userinput == '%'):
+        result = divisionRem();
+        print("Remainder: " + str(result));
       
     elif(userinput == 'MS'):
         memoryStore(result);
@@ -161,11 +178,10 @@ while(True):
 
     elif(userinput == 'C'):
         clearCalc();
-        memoryClear();
         result = None;
         printMenu();
         
-    elif(userinput == 'x' or userinput == 'X'):
+    elif(userinput == 'X'):
         exit();
         
     else:
