@@ -18,20 +18,20 @@ def addBtn(symbol):
 def btnClear():
     """ Clears all global variables and empties memory"""
     entry.delete(0, END)
-    global char
-    char = None
-    global first
-    first = None
-    global result
-    result = None
+    global SYMBOL
+    SYMBOL = None
+    global FIRST
+    FIRST = None
+    global RESULT
+    RESULT = None
 
 def btnCE():
     """ Clears current entry only """
     entry.delete(0, END)
-    global first
-    first = None
-    global char
-    char = None
+    global FIRST
+    FIRST = None
+    global SYMBOL
+    SYMBOL = None
     
 def addSign(a):
     """ Converts negative into positive and positive into negative """
@@ -52,175 +52,175 @@ def btnSign():
 def Add():
     """ Passes two global variables to the equal method, similiar for -,*,/,**"""
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    global char
-    char = "+"
+    global SYMBOL
+    SYMBOL = "+"
     
 def Sub():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    global char
-    char = "-"
+    global SYMBOL
+    SYMBOL = "-"
 
 def Mul():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    global char
-    char = "*"
+    global SYMBOL
+    SYMBOL = "*"
 
 def Div():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    global char
-    char = "/"
+    global SYMBOL
+    SYMBOL = "/"
     
 def Pow():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    global char
-    char = "**"
+    global SYMBOL
+    SYMBOL = "**"
 
 def Mod():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    global char
-    char = "mod"
+    global SYMBOL
+    SYMBOL = "mod"
     
 def Equal():
     """Where the calculations for two operand methods take place"""
     b = entry.get()
     second = numconversion(b)
     entry.delete(0, END)
-    if (char == "+"):
-        result = first + second
+    if (SYMBOL == "+"):
+        result = FIRST + second
         entry.insert(0, result)  
-    elif(char == "-"):
-        result = first - second
+    elif(SYMBOL == "-"):
+        result = FIRST - second
         entry.insert(0, result)
-    elif(char == "*"):
-        result = first * second
+    elif(SYMBOL == "*"):
+        result = FIRST * second
         entry.insert(0, result)
-    elif(char == "/"):
+    elif(SYMBOL == "/"):
         if(second != 0):
-            result = first/second
+            result = FIRST/second
             entry.insert(0, result)
         else:
             messagebox.showerror("Error", "Division by zero is impossible!")
-    elif(char == "**"):
-        result = first ** second
+    elif(SYMBOL == "**"):
+        result = FIRST ** second
         entry.insert(0, result)
-    elif(char == "mod"):
-        result = math.fmod(first, second)
+    elif(SYMBOL == "mod"):
+        result = math.fmod(FIRST, second)
         entry.insert(0, result)
 
 def Log():
     """ Similar functions for all one operand methods"""
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    if(first > 0):
-        result = math.log(first)
+    if(FIRST > 0):
+        result = math.log(FIRST)
         entry.insert(0, result)
     else:
         messagebox.showerror("Error", "No log for non-positive integers!")
     
 def Recp():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    if(first != 0):
-        result = 1 / first
+    if(FIRST != 0):
+        result = 1 / FIRST
         entry.insert(0, result)
     else:
         messagebox.showerror("Error", "Division by zero is impossible!")
     
 def Sqrt():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    if first >= 0:
-        result = math.sqrt(first)
+    if FIRST >= 0:
+        result = math.sqrt(FIRST)
     else:
         messagebox.showerror("Error", "No square root for negatives!")
     entry.insert(0, result)
     
 def SqPw():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    result = first ** 2
+    result = FIRST ** 2
     entry.insert(0, result)
     
 def Fact():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    if(first < 0 or ('.' in str(first))):
+    if(FIRST < 0 or ('.' in str(FIRST))):
         messagebox.showerror("Error", "Factorial only for non-negative integers!")
-    elif(first == 0):
+    elif(FIRST == 0):
         result = 1
         entry.insert(0, result)
     else:
         result = 1
-        for i in range(1,first + 1):
+        for i in range(1,FIRST + 1):
             result = result * i
         entry.insert(0, result)
 
 def tenPow():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    result = 10 ** first
+    result = 10 ** FIRST
     entry.insert(0, result)
     
 def Exp():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    result = math.exp(first)
+    result = math.exp(FIRST)
     entry.insert(0, result)
     
 def sin():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    result = math.sin(first)
+    result = math.sin(FIRST)
     entry.insert(0, result)
     
 def cos():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    result = math.cos(first)
+    result = math.cos(FIRST)
     entry.insert(0, result)
     
 def tan():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    global FIRST
+    FIRST = numconversion(a)
     entry.delete(0, END)
-    result = math.tan(first)
+    result = math.tan(FIRST)
     entry.insert(0, result)
     
 def radConv():
@@ -237,36 +237,49 @@ def degConv():
     converted = math.degrees(unconverted)
     entry.insert(0, converted)
 
+def addPi():
+    entry.insert(0, math.pi)
+
 def memoryStore(): #TODO make it work only for results
-    global result
-    result = entry.get()
+    global RESULT
+    RESULT = entry.get()
     
 def memoryRecall():
-    global result
-    if (result != None):
-        entry.insert(0, result)
+    global RESULT
+    if (RESULT != None):
+        entry.insert(0, RESULT)
     else:
         messagebox.showerror("Error", "Memory is empty!")
         
 def memoryAdd():
-    global result
-    if (result != None):
-        presentRes = entry.get()
-        result = result + presentRes
+    global RESULT
+    if (RESULT != None):
+         a = entry.get()
+         presentRes = numconversion(a)
+         entry.delete(0, END)
+         storedRes = numconversion(RESULT)
+         calculation = storedRes + presentRes
+         RESULT  = str(calculation)
+         entry.insert(0, RESULT)
     else:
         messagebox.showerror("Error", "Memory is empty!")
         
-def memorySub(): #TODO fix weird error
-    global result
-    if (result != None):
-        presentRes = entry.get()
-        result = result - presentRes
+def memorySub():
+    global RESULT
+    if (RESULT != None):
+         a = entry.get()
+         presentRes = numconversion(a)
+         entry.delete(0, END)
+         storedRes = numconversion(RESULT)
+         calculation = storedRes - presentRes
+         RESULT  = str(calculation)
+         entry.insert(0, RESULT)
     else:
         messagebox.showerror("Error", "Memory is empty!")
         
 def memoryClear():
-    global result
-    result = None
+    global RESULT
+    RESULT = None
 
 
 root = Tk()
@@ -291,7 +304,7 @@ btn_point = Button(root, text = ".", padx = 41, pady = 20, command = lambda: add
 
 
 # Function buttons
-btn_pi = Button(root, text = "Pi", padx = 38, pady = 20, command = addBtn)
+btn_pi = Button(root, text = "Pi", padx = 38, pady = 20, command = addPi)
 btn_sign = Button(root, text = "+/-", padx = 34, pady = 20, command = btnSign)
 btn_clr = Button(root, text = "Clear", padx = 30, pady = 20, command = btnClear)
 btn_clrent = Button(root, text = "CE", padx = 36, pady = 20, command = btnCE)
