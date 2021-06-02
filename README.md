@@ -1,8 +1,6 @@
 # PythonCalculator
 A Python project, I'm doing for an assignment.
 
-The program can calculate simple arithmetic operations and has a very basic memory system. The project is divided in 2 parts:
+The first part consists of a simple console calculator with a simple memory system.
 
-V1.0 - a console app with a memory system of a single variable;
-
-V2.0 - a GUI app with a memory system of a single variable;
+The second part consists is a GUI scientific calculator made with the tkinter module. 
