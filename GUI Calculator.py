@@ -105,7 +105,7 @@ def Equal():
     entry.delete(0, END)
     if (SYMBOL == "+"):
         result = FIRST + second
-        entry.insert(0, result)  
+        entry.insert(0, result)
     elif(SYMBOL == "-"):
         result = FIRST - second
         entry.insert(0, result)
@@ -240,9 +240,9 @@ def degConv():
 def addPi():
     entry.insert(0, math.pi)
 
-def memoryStore(): #TODO make it work only for results
+def memoryStore(): 
     global RESULT
-    RESULT = entry.get()
+    RESULT = entry.get()  
     
 def memoryRecall():
     global RESULT
@@ -284,6 +284,7 @@ def memoryClear():
 
 root = Tk()
 root.title("Scientific Calculator")
+root.resizable(False, False) #disables resizing
 
 entry = Entry(root, width = 50, borderwidth = 5)
 entry.grid(row = 0, column = 0, columnspan = 3, padx = 10, pady = 10)
