@@ -44,10 +44,9 @@ def addSign(a):
     
 def btnSign():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    unsignedNum = numconversion(a)
     entry.delete(0, END)
-    signedNum = addSign(first)
+    signedNum = addSign(unsignedNum)
     entry.insert(0, signedNum)
 
 def Add():
@@ -103,7 +102,6 @@ def Equal():
     """Where the calculations for two operand methods take place"""
     b = entry.get()
     second = numconversion(b)
-    # TODO find a way to make the second negative as well, same for rad and grad
     entry.delete(0, END)
     if (char == "+"):
         result = first + second
@@ -169,20 +167,20 @@ def SqPw():
     result = first ** 2
     entry.insert(0, result)
     
-def Fact(): #TODO fix factorial calculations
+def Fact():
     a = entry.get()
     global first
     first = numconversion(a)
     entry.delete(0, END)
-    if(first <= 0 or ('.' in str(first))):
+    if(first < 0 or ('.' in str(first))):
         messagebox.showerror("Error", "Factorial only for non-negative integers!")
     elif(first == 0):
         result = 1
         entry.insert(0, result)
     else:
         result = 1
-        for i in range(first):
-            result *= i
+        for i in range(1,first + 1):
+            result = result * i
         entry.insert(0, result)
 
 def tenPow():
@@ -227,21 +225,19 @@ def tan():
     
 def radConv():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    unconverted = numconversion(a)
     entry.delete(0, END)
-    converted = math.radians(first)
+    converted = math.radians(unconverted)
     entry.insert(0, converted)
     
 def degConv():
     a = entry.get()
-    global first
-    first = numconversion(a)
+    unconverted = numconversion(a)
     entry.delete(0, END)
-    converted = math.degrees(first)
+    converted = math.degrees(unconverted)
     entry.insert(0, converted)
 
-def memoryStore():
+def memoryStore(): #TODO make it work only for results
     global result
     result = entry.get()
     
@@ -278,7 +274,7 @@ root.title("Scientific Calculator")
 
 entry = Entry(root, width = 50, borderwidth = 5)
 entry.grid(row = 0, column = 0, columnspan = 3, padx = 10, pady = 10)
-entry.bind("<Key>", lambda e: "break") #disable keyboard input
+entry.bind("<Key>", lambda e: "break") #disables keyboard input
 
 # Number buttons
 btn_1 = Button(root, text = "1", padx = 41, pady = 20, command = lambda: addBtn("1"))
